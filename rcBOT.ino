@@ -4,10 +4,10 @@
 #include <stdlib.h>
 #include <RF24_config.h>
 
-#define motor_left_1    <>
-#define motor_left_2    <>
-#define motor_right_1   <>
-#define motor_right_2   <>
+#define motor_left_1    2
+#define motor_left_2    3
+#define motor_right_1   7
+#define motor_right_2   8
 
 char command[16];
 

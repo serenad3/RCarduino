@@ -5,12 +5,9 @@
 #include "RF24.h"
 
 RF24 radio(8,9);
-// Radio pipe addresses for the 2 nodes to communicate.
 const uint64_t pipes[2] = { 0xF0F0F0F0E1LL, 0xF0F0F0F0D2LL };
 
-// <<< Your Ethernet Shield mac address
 byte mac[] = {0x00, 0xAA, 0xBB, 0xCC, 0xDA, 0x02};
-// <<< Enter your Ethernet Shield IP address here!
 IPAddress ip(192,168,1,177);
 EthernetServer server(80);
 
@@ -25,7 +22,6 @@ void setup(){
   radio.begin();
   radio.openWritingPipe(pipes[0]);
   radio.openReadingPipe(1,pipes[1]);
-// Start listening
   radio.startListening();
 // For debug
   Serial.begin(9600);
@@ -36,7 +32,6 @@ void loop(){
  
   EthernetClient client = server.available();
 
-// Wait for the connection:
   if (client) {
     while (client.connected()) {
       if (client.available()) {

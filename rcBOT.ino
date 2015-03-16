@@ -4,27 +4,10 @@
 #include <stdlib.h>
 #include <RF24_config.h>
 
-
-// Define
-#define alante_c     sw1
-#define atras_c      sw2
-#define derecha_c    sw3
-#define izquierda_c  sw4
-
-#define alante    u
-#define atras     d
-#define derecha   r
-#define izquierda l
-
-boolean sw1;
-boolean sw2;
-boolean sw3;
-boolean sw4;
-
-boolean alante;
-boolean atras;
-boolean derecha;
-boolean izquierda;
+#define motor_left_1    <>
+#define motor_left_2    <>
+#define motor_right_1   <>
+#define motor_right_2   <>
 
 char command[16];
 
@@ -32,9 +15,15 @@ RF24 radio(48,53);
 const uint64_t pipes = 0xE8E8F0F0E1LL;
 
 void setup() {
-    pinMode(13, OUTPUT);
-  
+    pinMode(13, OUTPUT); //testigo de sw//
+    
+    pinMode(motor_left_1, OUTPUT);
+    pinMode(motor_left_2, OUTPUT);
+    pinMode(motor_right_1, OUTPUT);
+    pinMode(motor_right_2, OUTPUT);
+    
     Serial.begin(9600);
+    
     radio.begin();
     radio.openReadingPipe(1,pipes);
     radio.startListening();
@@ -80,35 +69,59 @@ void loop() {
       Serial.println(d4i); 
       
 // palancas para movimiento continuo
-      if (s1i == 0)  digitalWrite(13, LOW); //sw1=0//
-      if (s1i == 1)  digitalWrite(13, HIGH);//sw1=1// 
-      if (s2i == '0')  sw2=0; 
-      if (s2i == '1')  sw2=1;
-      if (s3i == '0')  sw3=0; 
-      if (s3i == '1')  sw3=1;
-      if (s4i == '0')  sw4=0; 
-      if (s4i == '1')  sw4=1;
+      if (s1i == 0)  parar();//digitalWrite(13, LOW);
+      if (s1i == 1)  alante();//digitalWrite(13, HIGH);
+      if (s2i == 0)  parar(); 
+      if (s2i == 1)  atras();
+      if (s3i == 0)  parar(); 
+      if (s3i == 1)  derecha();
+      if (s4i == 0)  parar(); 
+      if (s4i == 1)  izquierda();
 
 // motor alante
-      if (i2i > 90)    u=1;
+      if (i2i > 90)     alante();
 // motor atras
-      if (i2i < 90)    d=1;
+      if (i2i < 90)     atras();
 // motor parado eje Y
-      if (i2i == 90) {
-                      u=0;
-                      d=0;
-                     }
+      if (i2i == 90)    parar();
 // motor derecha
-      if (d3i > 90)    r=1;
+      if (d3i > 90)     derecha();
 // motor izquierda
-      if (d3i < 90)    l=1;
+      if (d3i < 90)     izquierda();
 // motor parado eje X
-      if (d3i == 90) {
-                      r=0;
-                      l=0;
-                     }
+      if (d3i == 90)    parar();
 
-
-// activar motores segun valores swx o uprl
  }
+}
+
+void alante(){
+digitalWrite(motor_left_1, HIGH);
+digitalWrite(motor_left_2, LOW);
+digitalWrite(motor_right_1, HIGH);
+digitalWrite(motor_right_2, LOW);
+}
+void atras(){
+digitalWrite(motor_left_1, LOW);
+digitalWrite(motor_left_2, HIGH);
+digitalWrite(motor_right_1, LOW);
+digitalWrite(motor_right_2, HIGH);
+}
+void derecha(){
+digitalWrite(motor_left_1, HIGH);
+digitalWrite(motor_left_2, LOW);
+digitalWrite(motor_right_1, LOW);
+digitalWrite(motor_right_2, HIGH);
+}
+void izquierda(){
+digitalWrite(motor_left_1, LOW);
+digitalWrite(motor_left_2, HIGH);
+digitalWrite(motor_right_1, HIGH);
+digitalWrite(motor_right[1], LOW);
+}
+void parar(){
+digitalWrite(motor_left_1, LOW);
+digitalWrite(motor_left_2, LOW);
+digitalWrite(motor_right_1, LOW);
+digitalWrite(motor_right_2, LOW);
+delay(25);
 }

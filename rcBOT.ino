@@ -116,7 +116,7 @@ void izquierda(){
 digitalWrite(motor_left_1, LOW);
 digitalWrite(motor_left_2, HIGH);
 digitalWrite(motor_right_1, HIGH);
-digitalWrite(motor_right[1], LOW);
+digitalWrite(motor_right_2, LOW);
 }
 void parar(){
 digitalWrite(motor_left_1, LOW);

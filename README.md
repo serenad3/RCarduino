@@ -1,4 +1,4 @@
-# RCarduino is a remote control on a gateway using rcduino app
+#RCarduino is a remote control on a gateway using rcduino app
 
 #Hardware:
 #arduino one (Original)
@@ -6,7 +6,7 @@
 #2 x NRF24L01
 #ethernet shield W5100 (clone)
 #motor drive shield L293D (clone)
-#chassis with 2 dc car engine
+#chassis with 2 dc motor
 
 #Software:
 #arduino IDE 1.6.1

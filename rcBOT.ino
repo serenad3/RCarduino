@@ -1,8 +1,11 @@
-#include <Nrf2401.h>
-#include <NRF24.h>
 #include <SPI.h>
+#include <nRF24L01.h>
+#include <RF24.h>
 #include <stdlib.h>
+#include <RF24_config.h>
 
+
+// Define
 #define alante_c     sw1
 #define atras_c      sw2
 #define derecha_c    sw3
@@ -23,34 +26,26 @@ boolean atras;
 boolean derecha;
 boolean izquierda;
 
-char c;
 char command[16];
 
 RF24 radio(48,53);
-const uint64_t pipes[2] = { 0xF0F0F0F0E1LL, 0xF0F0F0F0D2LL };
+const uint64_t pipes = 0xE8E8F0F0E1LL;
 
 void setup() {
-
-    radio.begin();  
-    radio.openWritingPipe(pipes[0]);
-    radio.openReadingPipe(1,pipes[1]);
-
-    radio.startListening();
-
+    pinMode(13, OUTPUT);
+  
     Serial.begin(9600);
+    radio.begin();
+    radio.openReadingPipe(1,pipes);
+    radio.startListening();
 }
 
 void loop() {
-
- while ( ! radio.available()) { 
+ if (radio.available()) { 
   
 // recibir DATA de nrf24l01+ origen
 
-      unsigned long got_message;
-
-      for (int x=0 ; x<16 ; x++){
-      c = radio.read( &got_message, sizeof(unsigned long) );
-      command[x] = c;
+      radio.read(command, 16);
             
       char s1[2] = {command[0], '\0'};
       char s2[2] = {command[1], '\0'};
@@ -85,8 +80,8 @@ void loop() {
       Serial.println(d4i); 
       
 // palancas para movimiento continuo
-      if (s1i == '0')  sw1=0;
-      if (s1i == '1')  sw1=1; 
+      if (s1i == 0)  digitalWrite(13, LOW); //sw1=0//
+      if (s1i == 1)  digitalWrite(13, HIGH);//sw1=1// 
       if (s2i == '0')  sw2=0; 
       if (s2i == '1')  sw2=1;
       if (s3i == '0')  sw3=0; 
@@ -114,7 +109,6 @@ void loop() {
                      }
 
 
-// activar motors segun valores swx o uprl
-      }
+// activar motores segun valores swx o uprl
  }
 }

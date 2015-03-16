@@ -12,6 +12,6 @@
 #arduino IDE 1.6.1
 #rcduino 1.0 app for iphone
 
-#arducode basis for GW
-#arducode for Carbot
+#arducode for base gateway
+#arducode for car bot
 

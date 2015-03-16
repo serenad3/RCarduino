@@ -34,14 +34,14 @@ void setup() {
     radio.begin();  
     radio.openWritingPipe(pipes[0]);
     radio.openReadingPipe(1,pipes[1]);
-// Start listening
+
     radio.startListening();
 
     Serial.begin(9600);
 }
 
 void loop() {
-// while  
+
  while ( ! radio.available()) { 
   
 // recibir DATA de nrf24l01+ origen

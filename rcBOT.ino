@@ -3,11 +3,13 @@
 #include <RF24.h>
 #include <stdlib.h>
 #include <RF24_config.h>
+#include <AFMotor.h>
 
-#define motor_left_1    2
-#define motor_left_2    3
-#define motor_right_1   7
-#define motor_right_2   8
+
+//#define motor_left_1    2
+//#define motor_left_2    3
+//#define motor_right_1   7
+//#define motor_right_2   8
 
 char command[16];
 
@@ -17,10 +19,10 @@ const uint64_t pipes = 0xE8E8F0F0E1LL;
 void setup() {
     pinMode(13, OUTPUT); //testigo de sw//
     
-    pinMode(motor_left_1, OUTPUT);
-    pinMode(motor_left_2, OUTPUT);
-    pinMode(motor_right_1, OUTPUT);
-    pinMode(motor_right_2, OUTPUT);
+    //pinMode(motor_left_1, OUTPUT);
+    //pinMode(motor_left_2, OUTPUT);
+    //pinMode(motor_right_1, OUTPUT);
+    //pinMode(motor_right_2, OUTPUT);
     
     Serial.begin(9600);
     
@@ -95,33 +97,33 @@ void loop() {
 }
 
 void alante(){
-digitalWrite(motor_left_1, HIGH);
-digitalWrite(motor_left_2, LOW);
-digitalWrite(motor_right_1, HIGH);
-digitalWrite(motor_right_2, LOW);
+//digitalWrite(motor_left_1, HIGH);
+//digitalWrite(motor_left_2, LOW);
+//digitalWrite(motor_right_1, HIGH);
+//digitalWrite(motor_right_2, LOW);
 }
 void atras(){
-digitalWrite(motor_left_1, LOW);
-digitalWrite(motor_left_2, HIGH);
-digitalWrite(motor_right_1, LOW);
-digitalWrite(motor_right_2, HIGH);
+//digitalWrite(motor_left_1, LOW);
+//digitalWrite(motor_left_2, HIGH);
+//digitalWrite(motor_right_1, LOW);
+//digitalWrite(motor_right_2, HIGH);
 }
 void derecha(){
-digitalWrite(motor_left_1, HIGH);
-digitalWrite(motor_left_2, LOW);
-digitalWrite(motor_right_1, LOW);
-digitalWrite(motor_right_2, HIGH);
+//digitalWrite(motor_left_1, HIGH);
+//digitalWrite(motor_left_2, LOW);
+//digitalWrite(motor_right_1, LOW);
+//digitalWrite(motor_right_2, HIGH);
 }
 void izquierda(){
-digitalWrite(motor_left_1, LOW);
-digitalWrite(motor_left_2, HIGH);
-digitalWrite(motor_right_1, HIGH);
-digitalWrite(motor_right_2, LOW);
+//digitalWrite(motor_left_1, LOW);
+//digitalWrite(motor_left_2, HIGH);
+//digitalWrite(motor_right_1, HIGH);
+//digitalWrite(motor_right_2, LOW);
 }
 void parar(){
-digitalWrite(motor_left_1, LOW);
-digitalWrite(motor_left_2, LOW);
-digitalWrite(motor_right_1, LOW);
-digitalWrite(motor_right_2, LOW);
-delay(25);
+//digitalWrite(motor_left_1, LOW);
+//digitalWrite(motor_left_2, LOW);
+//digitalWrite(motor_right_1, LOW);
+//digitalWrite(motor_right_2, LOW);
+//delay(25);
 }

@@ -5,6 +5,8 @@
 #include <RF24_config.h>
 #include <AFMotor.h>
 
+AF_DCMotor motori(1);
+AF_DCMotor motord(2);
 
 //#define motor_left_1    2
 //#define motor_left_2    3
@@ -18,7 +20,6 @@ const uint64_t pipes = 0xE8E8F0F0E1LL;
 
 void setup() {
     pinMode(13, OUTPUT); //testigo de sw//
-    
     //pinMode(motor_left_1, OUTPUT);
     //pinMode(motor_left_2, OUTPUT);
     //pinMode(motor_right_1, OUTPUT);
@@ -29,6 +30,9 @@ void setup() {
     radio.begin();
     radio.openReadingPipe(1,pipes);
     radio.startListening();
+    
+    motori.setSpeed(255);
+    motord.setSpeed(255);
 }
 
 void loop() {
@@ -59,7 +63,12 @@ void loop() {
       int i2i = atol (i2);
       int d3i = atoi (d3);
       int d4i = atoi (d4);   
-      
+
+// establecer velocidad de los motores
+    motori.setSpeed(i2i);
+    motord.setSpeed(d3i);
+
+// Debug      
       Serial.print(s1i);
       Serial.print(s2i);
       Serial.print(s3i);
@@ -97,30 +106,40 @@ void loop() {
 }
 
 void alante(){
+ motori.run(FORWARD);
+ motord.run(FORWARD);
 //digitalWrite(motor_left_1, HIGH);
 //digitalWrite(motor_left_2, LOW);
 //digitalWrite(motor_right_1, HIGH);
 //digitalWrite(motor_right_2, LOW);
 }
 void atras(){
+    motori.run(BACKWARD);
+    motord.run(BACKWARD);
 //digitalWrite(motor_left_1, LOW);
 //digitalWrite(motor_left_2, HIGH);
 //digitalWrite(motor_right_1, LOW);
 //digitalWrite(motor_right_2, HIGH);
 }
 void derecha(){
+    motori.run(FORWARD);
+    motord.run(BACKWARD);
 //digitalWrite(motor_left_1, HIGH);
 //digitalWrite(motor_left_2, LOW);
 //digitalWrite(motor_right_1, LOW);
 //digitalWrite(motor_right_2, HIGH);
 }
 void izquierda(){
+    motori.run(BACKWARD);
+    motord.run(FORWARD);
 //digitalWrite(motor_left_1, LOW);
 //digitalWrite(motor_left_2, HIGH);
 //digitalWrite(motor_right_1, HIGH);
 //digitalWrite(motor_right_2, LOW);
 }
 void parar(){
+    motori.run(RELEASE);
+    motord.run(RELEASE);
 //digitalWrite(motor_left_1, LOW);
 //digitalWrite(motor_left_2, LOW);
 //digitalWrite(motor_right_1, LOW);

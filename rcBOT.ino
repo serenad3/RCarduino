@@ -31,8 +31,8 @@ void setup() {
     radio.openReadingPipe(1,pipes);
     radio.startListening();
     
-    motori.setSpeed(255);
-    motord.setSpeed(255);
+    motori.setSpeed(100);
+    motord.setSpeed(100);
 }
 
 void loop() {
@@ -64,20 +64,20 @@ void loop() {
       int d3i = atoi (d3);
       int d4i = atoi (d4);   
 
-// establecer velocidad de los motores
-    motori.setSpeed(i2i);
-    motord.setSpeed(d3i);
+// establecer velocidad de los motores segun posicion de la palanca
+    //motori.setSpeed(i2i);
+    //motord.setSpeed(d3i);
 
 // Debug      
-      Serial.print(s1i);
-      Serial.print(s2i);
-      Serial.print(s3i);
-      Serial.println(s4i);
+      //Serial.print(s1i);
+      //Serial.print(s2i);
+      //Serial.print(s3i);
+      //Serial.println(s4i);
 
-      Serial.print(i1i);
-      Serial.print(i2i);
-      Serial.print(d3i);
-      Serial.println(d4i); 
+      //Serial.print(i1i);
+      //Serial.print(i2i);
+      //Serial.print(d3i);
+      //Serial.println(d4i); 
       
 // palancas para movimiento continuo
       if (s1i == 0)  parar();//digitalWrite(13, LOW);
@@ -123,14 +123,14 @@ void atras(){
 }
 void derecha(){
     motori.run(FORWARD);
-    motord.run(BACKWARD);
+    motord.run(RELEASE);
 //digitalWrite(motor_left_1, HIGH);
 //digitalWrite(motor_left_2, LOW);
 //digitalWrite(motor_right_1, LOW);
 //digitalWrite(motor_right_2, HIGH);
 }
 void izquierda(){
-    motori.run(BACKWARD);
+    motori.run(RELEASE);
     motord.run(FORWARD);
 //digitalWrite(motor_left_1, LOW);
 //digitalWrite(motor_left_2, HIGH);

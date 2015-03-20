@@ -54,8 +54,8 @@ void loop() {
       int d4i = atoi (d4);   
 
 // establecer velocidad de los motores segun posicion de la palanca
-    //int spi = (i2i-90);
-    //int spd = (d3i-90);
+    //unsigned int spi = (i2i-90);
+    //unsigned int spd = (d3i-90);
     //motori.setSpeed(spi);
     //motord.setSpeed(spd);
 

@@ -8,24 +8,15 @@
 AF_DCMotor motori(1);
 AF_DCMotor motord(2);
 
-//#define motor_left_1    2
-//#define motor_left_2    3
-//#define motor_right_1   7
-//#define motor_right_2   8
-
 char command[16];
 
 RF24 radio(48,53);
 const uint64_t pipes = 0xE8E8F0F0E1LL;
 
 void setup() {
-    pinMode(13, OUTPUT); //testigo de sw//
-    //pinMode(motor_left_1, OUTPUT);
-    //pinMode(motor_left_2, OUTPUT);
-    //pinMode(motor_right_1, OUTPUT);
-    //pinMode(motor_right_2, OUTPUT);
-    
-    Serial.begin(9600);
+// Debug
+    //pinMode(13, OUTPUT); //testigo de sw//
+    //Serial.begin(9600);
     
     radio.begin();
     radio.openReadingPipe(1,pipes);
@@ -39,7 +30,6 @@ void loop() {
  if (radio.available()) { 
   
 // recibir DATA de nrf24l01+ origen
-
       radio.read(command, 16);
             
       char s1[2] = {command[0], '\0'};
@@ -53,7 +43,6 @@ void loop() {
       char d4[4] = {command[13], command[14], command[15], '\0'};   
      
 // Convert char to int:
-      
       int s1i = atol (s1);
       int s2i = atol (s2);
       int s3i = atoi (s3);
@@ -110,41 +99,20 @@ void loop() {
 void alante(){
  motori.run(FORWARD);
  motord.run(FORWARD);
-//digitalWrite(motor_left_1, HIGH);
-//digitalWrite(motor_left_2, LOW);
-//digitalWrite(motor_right_1, HIGH);
-//digitalWrite(motor_right_2, LOW);
 }
 void atras(){
     motori.run(BACKWARD);
     motord.run(BACKWARD);
-//digitalWrite(motor_left_1, LOW);
-//digitalWrite(motor_left_2, HIGH);
-//digitalWrite(motor_right_1, LOW);
-//digitalWrite(motor_right_2, HIGH);
 }
 void derecha(){
     motori.run(FORWARD);
     motord.run(RELEASE);
-//digitalWrite(motor_left_1, HIGH);
-//digitalWrite(motor_left_2, LOW);
-//digitalWrite(motor_right_1, LOW);
-//digitalWrite(motor_right_2, HIGH);
 }
 void izquierda(){
     motori.run(RELEASE);
     motord.run(FORWARD);
-//digitalWrite(motor_left_1, LOW);
-//digitalWrite(motor_left_2, HIGH);
-//digitalWrite(motor_right_1, HIGH);
-//digitalWrite(motor_right_2, LOW);
 }
 void parar(){
     motori.run(RELEASE);
     motord.run(RELEASE);
-//digitalWrite(motor_left_1, LOW);
-//digitalWrite(motor_left_2, LOW);
-//digitalWrite(motor_right_1, LOW);
-//digitalWrite(motor_right_2, LOW);
-//delay(25);
 }

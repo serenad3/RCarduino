@@ -22,8 +22,8 @@ void setup() {
     radio.openReadingPipe(1,pipes);
     radio.startListening();
     
-    motori.setSpeed(100);
-    motord.setSpeed(100);
+    motori.setSpeed(0);
+    motord.setSpeed(0);
 }
 
 void loop() {
@@ -54,10 +54,10 @@ void loop() {
       int d4i = atoi (d4);   
 
 // establecer velocidad de los motores segun posicion de la palanca
-    //unsigned int spi = (i2i-90);
-    //unsigned int spd = (d3i-90);
-    //motori.setSpeed(spi);
-    //motord.setSpeed(spd);
+    unsigned int spi = (i2i-90);
+    unsigned int spd = (d3i-90);
+    motori.setSpeed(spi);
+    motord.setSpeed(spd);
 
 // Debug      
       //Serial.print(s1i);
@@ -69,6 +69,9 @@ void loop() {
       //Serial.print(i2i);
       //Serial.print(d3i);
       //Serial.println(d4i); 
+      
+      //Serial.print(spi);
+      //Serial.println(spd); 
       
 // palancas para movimiento continuo
       if (s1i == 0)  parar();//digitalWrite(13, LOW);

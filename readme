@@ -15,3 +15,5 @@ rcduino 1.0 app for iphone
 arducode for base gateway
 arducode for car bot
 
+*Note: The code works, the problem is the range of the output supplied default mA (40-50), waiting to add an LLC
+

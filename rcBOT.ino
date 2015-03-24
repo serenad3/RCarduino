@@ -17,7 +17,7 @@ const uint64_t pipes = 0xE8E8F0F0E1LL;
 void setup() {
 // Debug
     //pinMode(13, OUTPUT); //testigo de sw//
-    Serial.begin(9600);
+//    Serial.begin(9600);
     
     radio.begin();
     radio.openReadingPipe(1,pipes);
@@ -64,19 +64,19 @@ void loop() {
     motord.setSpeed(vel);
 
 // Debug      
-      Serial.print(s1i);
-      Serial.print(s2i);
-      Serial.print(s3i);
-      Serial.println(s4i);
+//      Serial.print(s1i);
+//      Serial.print(s2i);
+//      Serial.print(s3i);
+//      Serial.println(s4i);
 
-      Serial.print(i1i);
-      Serial.print(i2i);
-      Serial.print(d3i);
-      Serial.println(d4i); 
+//      Serial.print(i1i);
+//      Serial.print(i2i);
+//      Serial.print(d3i);
+//      Serial.println(d4i); 
       
 //      Serial.print(spi);
 //      Serial.println(spd); 
-      Serial.println(vel); 
+//      Serial.println(vel); 
       
 // palancas para velocidad
       if (s1i == 1)  vel=50;//digitalWrite(13, HIGH);

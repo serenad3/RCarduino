@@ -5,10 +5,11 @@
 #include <RF24_config.h>
 #include <AFMotor.h>
 
-AF_DCMotor motori(1);
-AF_DCMotor motord(2);
+AF_DCMotor motori(1,MOTOR12_64KHZ);
+AF_DCMotor motord(2,MOTOR12_64KHZ);
 
 char command[16];
+int vel = 0;
 
 RF24 radio(48,53);
 const uint64_t pipes = 0xE8E8F0F0E1LL;
@@ -16,14 +17,14 @@ const uint64_t pipes = 0xE8E8F0F0E1LL;
 void setup() {
 // Debug
     //pinMode(13, OUTPUT); //testigo de sw//
-    //Serial.begin(9600);
+    Serial.begin(9600);
     
     radio.begin();
     radio.openReadingPipe(1,pipes);
     radio.startListening();
     
-    motori.setSpeed(0);
-    motord.setSpeed(0);
+    motori.setSpeed(vel);
+    motord.setSpeed(vel);
 }
 
 void loop() {
@@ -54,54 +55,55 @@ void loop() {
       int d4i = atoi (d4);   
 
 // establecer velocidad de los motores segun posicion de la palanca
-    unsigned int spi = (i2i-90);
-    unsigned int spd = (d3i-90);
-    motori.setSpeed(spi);
-    motord.setSpeed(spd);
+//    unsigned int spi = (i2i-90)+150;
+//    unsigned int spd = (d3i-90)+150;
+//    motori.setSpeed(spi);
+//    motord.setSpeed(spd);
+
+    motori.setSpeed(vel);
+    motord.setSpeed(vel);
 
 // Debug      
-      //Serial.print(s1i);
-      //Serial.print(s2i);
-      //Serial.print(s3i);
-      //Serial.println(s4i);
+      Serial.print(s1i);
+      Serial.print(s2i);
+      Serial.print(s3i);
+      Serial.println(s4i);
 
-      //Serial.print(i1i);
-      //Serial.print(i2i);
-      //Serial.print(d3i);
-      //Serial.println(d4i); 
+      Serial.print(i1i);
+      Serial.print(i2i);
+      Serial.print(d3i);
+      Serial.println(d4i); 
       
-      //Serial.print(spi);
-      //Serial.println(spd); 
+//      Serial.print(spi);
+//      Serial.println(spd); 
+      Serial.println(vel); 
       
-// palancas para movimiento continuo
-      if (s1i == 0)  parar();//digitalWrite(13, LOW);
-      if (s1i == 1)  alante();//digitalWrite(13, HIGH);
-      if (s2i == 0)  parar(); 
-      if (s2i == 1)  atras();
-      if (s3i == 0)  parar(); 
-      if (s3i == 1)  derecha();
-      if (s4i == 0)  parar(); 
-      if (s4i == 1)  izquierda();
+// palancas para velocidad
+      if (s1i == 1)  vel=50;//digitalWrite(13, HIGH);
+      if (s2i == 1)  vel=150;
+      if (s3i == 1)  vel=200;
+      if (s4i == 1)  vel=250;
+      if (s1i == 0 & s2i == 0 & s3i == 0 & s4i == 0) vel=0;
+      
 
 // motor alante
       if (i2i > 90)     alante();
 // motor atras
       if (i2i < 90)     atras();
-// motor parado eje Y
-      if (i2i == 90)    parar();
 // motor derecha
       if (d3i > 90)     derecha();
 // motor izquierda
       if (d3i < 90)     izquierda();
-// motor parado eje X
-      if (d3i == 90)    parar();
+      
+// motor parado eje XY
+      if (d3i == 90 & i2i == 90)    parar();
 
  }
 }
 
 void alante(){
- motori.run(FORWARD);
- motord.run(FORWARD);
+    motori.run(FORWARD);
+    motord.run(FORWARD);
 }
 void atras(){
     motori.run(BACKWARD);

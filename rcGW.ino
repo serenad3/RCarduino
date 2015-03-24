@@ -17,7 +17,8 @@ IPAddress ip(192,168,1,177);
 EthernetServer server(80);
 
 void setup(){
-  Serial.begin(9600);
+//  Serial.begin(9600);
+  
   Ethernet.begin(mac, ip);
   server.begin();
   radio.begin();
@@ -40,7 +41,7 @@ void loop(){
           command[x] = c;
           radio.write(command, 16);
 
-          Serial.print(command);
+//        Serial.print(command);
 
       }
       incoming = 0;
@@ -49,10 +50,12 @@ void loop(){
   }
 } 
  
+Serial.print(command);
+
 delay(1);
 client.stop();
 radio.powerDown(); 
-delay(1000);
+//delay(1000);
 radio.powerUp();
 
-} 
+}

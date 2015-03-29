@@ -20,6 +20,7 @@ void setup() {
 //    Serial.begin(9600);
     
     radio.begin();
+    radio.setDataRate(RF24_250KBPS);
     radio.openReadingPipe(1,pipes);
     radio.startListening();
     

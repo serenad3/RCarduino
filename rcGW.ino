@@ -23,7 +23,7 @@ void setup(){
   server.begin();
   radio.begin();
   radio.setDataRate(RF24_250KBPS);
-  radio.setPayloadSize(sizeof);
+  radio.setPayloadSize(sizeof(unsigned long));
   radio.openWritingPipe(pipes);
 }
 

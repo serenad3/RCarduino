@@ -22,6 +22,7 @@ void setup(){
   Ethernet.begin(mac, ip);
   server.begin();
   radio.begin();
+  radio.setPALevel(RF24_PA_HIGH);
   radio.setDataRate(RF24_250KBPS);
   radio.setPayloadSize(sizeof(unsigned long));
   radio.openWritingPipe(pipes);

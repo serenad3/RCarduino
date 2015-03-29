@@ -20,6 +20,7 @@ void setup() {
 //    Serial.begin(9600);
     
     radio.begin();
+    radio.setPALevel(RF24_PA_HIGH);
     radio.setDataRate(RF24_250KBPS);
     radio.setPayloadSize(sizeof(unsigned long));
     radio.openReadingPipe(1,pipes);

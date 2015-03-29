@@ -21,6 +21,7 @@ void setup() {
     
     radio.begin();
     radio.setDataRate(RF24_250KBPS);
+    radio.setPayloadSize(sizeoff);
     radio.openReadingPipe(1,pipes);
     radio.startListening();
     
